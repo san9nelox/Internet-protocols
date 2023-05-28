@@ -1,0 +1,9 @@
+{
+  "from": "abc@yandex.ru",
+  "to": [
+    "test1@yandex.ru",
+    "test2@yandex.ru"
+  ],
+  "subject": "заголовок",
+  "attachments_path": "attachments"
+}
