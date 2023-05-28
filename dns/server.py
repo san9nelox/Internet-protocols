@@ -62,13 +62,14 @@ class DNSServer:
             response_record = DNSRecord.parse(response)
 
             if response_record.header.rcode == RCODE.NOERROR:
+                print(f"Cached record:\n{response_record}", end="\n\n")
                 records_by_type = {}
                 for rr_section in (response_record.rr, response_record.auth, response_record.ar):
                     for rr in rr_section:
                         if (rr.rtype, rr.rname) not in records_by_type:
                             records_by_type[(rr.rtype, rr.rname)] = []
                         records_by_type[(rr.rtype, rr.rname)].append(rr)
-                        print(f"Cached record:\n{rr}", end="\n\n")
+
                         self.update_cache((rr.rtype, rr.rname), records_by_type[(rr.rtype, rr.rname)], rr.ttl)
 
                 return response
